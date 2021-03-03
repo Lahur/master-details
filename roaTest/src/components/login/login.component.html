@@ -1,0 +1,16 @@
+<mat-card class="login-card">
+  <form class="login-form" [formGroup]="loginGroup" (ngSubmit)="login()">
+    <mat-card-title>Login</mat-card-title>
+    <mat-form-field appearance="fill" class="login-input">
+      <mat-label>Korisničko ime</mat-label>
+      <input formControlName="username" matInput/>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="login-input">
+      <mat-label>Lozinka</mat-label>
+      <input formControlName="lozinka" type="password" matInput/>
+    </mat-form-field>
+    <br>
+    <button type="submit" color="primary" mat-raised-button>Prijava</button>
+  </form>
+</mat-card>

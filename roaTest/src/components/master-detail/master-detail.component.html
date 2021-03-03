@@ -1,0 +1,125 @@
+<mat-card class="master-detail">
+  <form [formGroup]="detailGroup">
+    <table>
+      <tr class="detail-title">
+        <td colspan="4"><b>Osobni podaci</b></td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Ime</mat-label>
+            <input formControlName="ime" matInput/>
+            <mat-error *ngIf="detailGroup.get('ime').hasError('required')">Potrebno ispuniti</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Prezime</mat-label>
+            <input formControlName="prezime" matInput/>
+            <mat-error *ngIf="detailGroup.get('prezime').hasError('required')">Potrebno ispuniti</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>OIB</mat-label>
+            <input formControlName="oib" matInput/>
+            <mat-error *ngIf="detailGroup.get('oib').hasError('pattern')">Neispravan oib</mat-error>
+            <mat-error *ngIf="detailGroup.get('oib').hasError('required')">Potrebno ispuniti</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Država</mat-label>
+            <mat-select formControlName="drzavaId">
+              <mat-option *ngFor="let drzava of drzave$ | async" [value]="drzava.id">
+                {{drzava.sifra}} - {{drzava.naziv}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="detailGroup.get('drzavaId').hasError('required')">Potrebno odabrati</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr class="detail-title">
+        <td colspan="4"><b>Korisnički podaci</b></td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Korisničko ime</mat-label>
+            <input formControlName="username" matInput/>
+            <mat-error *ngIf="detailGroup.get('username').hasError('required')">Potrebno ispuniti</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill" [hideRequiredMarker]="!passwordChange">
+            <mat-label>Lozinka</mat-label>
+            <input type="password" formControlName="lozinka" matInput/>
+            <mat-error *ngIf="detailGroup.get('lozinka').hasError('required')">Potrebno ispuniti</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill" [hideRequiredMarker]="!passwordChange">
+            <mat-label>Ponovi lozinku</mat-label>
+            <input type="password" formControlName="lozinka_rep" matInput/>
+            <mat-error *ngIf="detailGroup.get('lozinka_rep').hasError('required')">Potrebno ispuniti</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <section class="example-section" *ngIf="(korisnikSubject.asObservable() | async).id">
+            <mat-checkbox (change)="passChange()" class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="passwordChange">Promjena lozinke</mat-checkbox>
+          </section>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: left;">
+          <button mat-raised-button *ngIf="(korisnikSubject.asObservable() | async).id" color="warn" type="button" (click)="cancel()">Otkaži</button>
+        </td>
+        <td colspan="2" style="text-align: right; width: 50%">
+          <button *ngIf="(korisnikSubject.asObservable() | async).id" (click)="delete()" mat-raised-button color="warn" type="button" style="margin-right: 5px;">Obriši</button>
+          <button mat-raised-button color="primary" type="button" (click)="save()">Spremi</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-card>
+
+  <table mat-table [dataSource]="korisnici$ | async" class="mat-elevation-z8 master-detail">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="ime">
+      <th mat-header-cell *matHeaderCellDef> Ime </th>
+      <td mat-cell *matCellDef="let element"> {{element.ime}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="prezime">
+      <th mat-header-cell *matHeaderCellDef> Prezime </th>
+      <td mat-cell *matCellDef="let element"> {{element.prezime}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="oib">
+      <th mat-header-cell *matHeaderCellDef> OIB </th>
+      <td mat-cell *matCellDef="let element"> {{element.oib}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="drzava">
+      <th mat-header-cell *matHeaderCellDef> Drzava </th>
+      <td mat-cell *matCellDef="let element"> {{getDrzava(element.drzavaId, (drzave$ | async))}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Korisničko ime </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumn;" (click)="getData(row)"></tr>
+  </table>
+

@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Roa Test</span>
+    <span class="flexExpand"></span>
+    <button mat-button *ngIf="checkSession()" [satPopoverAnchor]="p" (click)="p.toggle()">
+      <mat-icon>person</mat-icon>
+      <span> {{(getCurrentKorisnik() | async)}}</span>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<sat-popover #p hasBackdrop verticalAlign="below">
+  <div style="background-color: white; width: 120px;">
+    <button mat-button style="width: 100%;" (click)="odjava()">Odjava</button>
+  </div>
+</sat-popover>
+<router-outlet></router-outlet>

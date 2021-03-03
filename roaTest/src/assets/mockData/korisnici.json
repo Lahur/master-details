@@ -1,0 +1,29 @@
+[
+  {
+    "id": "be3d2133-cf3c-4af6-b2df-ff2a3793d054",
+    "username": "mmaric",
+    "ime": "Marko",
+    "prezime": "Marić",
+    "lozinka": "test1",
+    "oib": "90722554419",
+    "drzavaId": "5ddc2387-0838-4ca3-a7a7-16389e623339"
+  },
+  {
+    "id": "ca1af042-1b3c-42ec-8f0e-f8eef2179e84",
+    "username": "afrancis",
+    "ime": "Ava",
+    "prezime": "Francis",
+    "lozinka": "test2",
+    "oib": "63968938745",
+    "drzavaId": "b96b26c6-a691-4a9f-9463-1501d911451c"
+  },
+  {
+    "id": "3fefc7c3-3350-49c5-bd01-3a8c910648fa",
+    "username": "ganand",
+    "ime": "Gurdeep",
+    "prezime": "Anand",
+    "lozinka": "test3",
+    "oib": "22792791678",
+    "drzavaId": "1ee43794-2042-4673-8700-b24d24f00d58"
+  }
+]

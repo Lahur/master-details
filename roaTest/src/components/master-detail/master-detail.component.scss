@@ -1,0 +1,53 @@
+td
+{
+  width: 25%;
+}
+.master-detail
+{
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+form
+{
+  width: 90%;
+  margin: 0 auto;
+}
+table
+{
+  width: 100%;
+  text-align: center;
+}
+.detail-title
+{
+  text-align: left;
+}
+
+mat-form-field
+{
+  width: 80%;
+  margin-top: 20px;
+}
+.mat-column-ime
+{
+  width: 20%;
+}
+.mat-column-prezime
+{
+  width: 20%;
+}
+.mat-column-oib
+{
+  width: 20%;
+}
+.mat-column-drzava
+{
+  width: 20%;
+}
+.mat-column-username
+{
+  width: 20%;
+}
+th.mat-header-cell {
+  text-align: center !important;
+}
